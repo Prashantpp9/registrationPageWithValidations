@@ -1,0 +1,162 @@
+<html>
+
+<head>
+    <title> Register </title>
+	
+    
+	<style>
+        body {
+            background-color: #313d42;
+        }
+        .msg {
+            font-size: 0.8rem;
+            color: red
+        }
+		.sucess-msg{
+			font-size: 1rem;
+            color: blue
+		}
+        .main-container {
+            height: 97vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        
+        .input-box {
+            padding: 1rem;
+        }
+        
+        .input.control {
+            height: 3rem;
+            width: 20rem;
+            border: 0px;
+            background-color: #313d42;
+            border-bottom: 1px solid #898989;
+            ;
+        }
+        
+        .btn {
+            height: 3rem;
+            width: 20rem;
+            background-color: #35f964;
+            border: 0px;
+            border-radius: 5px;
+            color: white;
+        }
+        
+        .btn:hover {
+            color: white;
+            background-color: #10a724;
+        }
+        
+        .input-radio {
+            margin-left: -7rem;
+        }
+        
+        .anchor {
+            color: #898989;
+            text-decoration: none;
+        }
+        
+        #register {
+            font-family: cursive;
+            font-size: 3rem;
+            font-style: italic;
+            color: #898989;
+        }
+        
+        #label {
+            color: #898989;
+        }
+    </style>
+	
+	<script>
+	var users = [];
+	function validate_userName() {
+            var name = document.getElementById("userName").value;
+            if (name.length == 0) {
+                document.getElementById("userName-msg").innerHTML = "&cross; please enter username"
+                return false
+            } else {
+                document.getElementById("userName-msg").innerHTML = ""
+                return name
+            }
+    }
+		
+	function validate_password() {
+            var pass = document.getElementById("password").value;
+            if (pass.length == 0 || pass.length < 8) {
+                document.getElementById("password-msg").innerHTML = "&cross; minimum 8 characters"
+                return false
+            } else {
+                document.getElementById("password-msg").innerHTML = ""
+                return pass
+            }
+    }
+		
+	function validate_emailId() {
+			var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+            var email = document.getElementById("emailId").value;
+            if (!email.match(mailformat)) {
+                document.getElementById("emailId-msg").innerHTML = "&cross; enter vaild mail id"
+                return false
+            } else {
+                document.getElementById("emailId-msg").innerHTML = ""
+                return email
+            }
+    }
+	
+	function add_user() {
+
+            var userName = validate_userName();
+            var pass = validate_password();
+            var email = validate_emailId();
+            
+            if (userName && pass && email) {
+                users.push({
+                    userName: userName,
+                    password: pass,
+                    emailId: email
+                })
+				document.getElementById("sucess-msg").innerHTML = "Sucessfully registered";
+            }
+        }
+	
+	</script>
+</head>
+
+<body>
+    <div class="main-container">
+        <span id="register">Register</span>
+        <div class="input-box">
+            <input type="text" id="userName" class="input control" placeholder="Username" onblur="validate_userName()"><br>
+			<span class="msg" id="userName-msg"></span>
+        </div>
+        <div class="input-box">
+            <input type="password" id="password" class="input control" placeholder="Password" onblur="validate_password()"><br>
+			<span class="msg" id="password-msg"></span>
+        </div>
+        <div class="input-box">
+            <input type="email" id="emailId" class="input control" placeholder="E-mail Address" 
+			onblur="validate_emailId()"><br>
+			<span class="msg" id="emailId-msg"></span>
+        </div>
+        <div>
+            <input type="radio" class="input-radio"> <label id="label">Accept rules and conditions</label>
+        </div>
+        <div class="input-box">
+            <button class="btn" onclick="add_user()">Register</button>
+        </div>
+        <div class="input-box">
+            <a href="4A_01_Login.html" class="anchor"> Already have an account?</a>
+        </div>
+		
+		<div>
+			<span class="sucess-msg" id="sucess-msg"></span>
+		</div>
+    </div>
+</body>
+
+</html>
